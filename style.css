@@ -56,3 +56,45 @@ h1:hover {
 .item:hover {
   background: rgba(0, 0, 0, 0.7);
 }
+
+a {
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+a:link,
+a:visited {
+  text-decoration: none;
+  color: #fff;
+}
+
+a:hover,
+a:active {
+  text-decoration: underline;
+}
+
+.fa-times-circle {
+  float: right;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.name {
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
+.name img {
+  height: 20px;
+  width: 20px;
+  vertical-align: sub; /*super*/
+  margin-right: 5px;
+}
+
+
+@media screen and (max-width: 600px) {
+  .container {
+    flex-direction: column;
+  }
+}
