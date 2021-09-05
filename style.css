@@ -92,6 +92,106 @@ a:active {
   margin-right: 5px;
 }
 
+.modal-container {
+  background: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+}
+
+.show-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+  max-width: 95%;
+  width: 500px;
+  animation: modalOpen 1s;
+}
+
+@keyframes modalOpen {
+  from {
+    opacity: 0;
+  }
+
+   to {
+     opacity: 1;
+   }
+}
+
+.close-icon {
+  float:  right;
+  color: white;
+  text-shadow: 2px 2px #1d1d1d;
+  font-size: 24px;
+  position: relative;
+  top: 13px;
+  right: 13px;
+  cursor: pointer;
+  /* z-index: 3; */
+}
+
+.modal-header {
+  background: var(--primary-color);
+  color: white;
+  text-shadow: 2px 2px #1d1d1d;
+  padding: 15px;
+}
+
+h3 {
+  margin: 0;
+}
+
+.modal-content {
+  padding: 20px;
+  background: whitesmoke;
+}
+
+/*From*/
+.form-group {
+  height: 55px;
+}
+
+.from-input {
+  width: 97%;
+  padding: 5px;
+  border:  1px solid var(--primary-color);
+  border-radius: var(--border-radius);
+  display: block;
+  outline: none;
+}
+
+.from-label {
+  color: var(--primary-color);
+  display: block;
+  font-weight: bold;
+}
+
+button {
+  cursor: pointer;
+  color: white;
+  background: var(--primary-color);
+  border: none;
+  border-radius: var(--border-radius);
+  height: 30px;
+  width: 100px;
+  margin-top: 10px;
+}
+
+button:hover {
+  filter: brightness(110%);
+}
+
+button:focus {
+  outline: none;
+}
 
 @media screen and (max-width: 600px) {
   .container {
