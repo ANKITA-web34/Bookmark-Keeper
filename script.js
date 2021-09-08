@@ -53,19 +53,68 @@ function storeBookmark(e) {
     bookmarkForm.reset();
     websiteNameEl.focus();
 }
+
+//Build bookmarks
+function buildBookmarks() {
+     //remove bookmark
+    bookmarksContainer.textContent = '';
+
+     //build html
+    bookmarks.forEach((bookmark) => {
+        const { name, url } = bookmark;
+        //item
+        const item = document.createElement('div');
+        item.classList.add('item');
+        //close icon
+        const closeIcon = document.createElement('i');
+        closeIcon.classList.add('fas', 'fa-times-circle');
+        closeIcon.setAttribute('title', 'Delete');
+        closeIcon.setAttribute('onclick', `deleteBookmark('${url}')`);
+        //favicon/ Link conatiner
+        const linkInfo = document.createElement('div');
+        linkInfo.classList.add('name');
+        //favicon
+        const favicon = document.createElement('img');
+        favicon.setAttribute('src', `https://s2.googleusercontent.com/s2/favicons?domain=${url}`);
+        favicon.setAttribute('alt', 'Favicon');
+        //link
+        const link = document.createElement('a');
+        link.setAttribute('href', `${url}`);
+        link.setAttribute('target', '_blank');
+        link.textContent = name;
+
+        //append to bookmark-conatiner
+        linkInfo.append(favicon, link);
+        item.append(closeIcon, linkInfo);
+        bookmarksContainer.appendChild(item);
+    });
+}
+
 //fetch bookmarks
 function fetchBookmarks() {
     if(localStorage.getItem('bookmarks')) {
         bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
     }else {
         bookmarks = [{
-                name: 'google',
-                url: 'https://google.com',
+                name: 'YouTube',
+                url: 'https://www.youtube.com',
             },
         ];
         localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
-    }
-    console.log(bookmarks)
+    }    
+    buildBookmarks();
+}
+
+//delete bookmark
+function deleteBookmark(url) {
+    bookmarks.forEach((bookmark, i) => {
+        if(bookmark.url === url) {
+            bookmarks.splice(i, 1);
+        }
+    });
+    //update bookmark arrey in localStorage
+    localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+    fetchBookmarks();
 }
 
 //EVENT LISTENERS
