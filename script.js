@@ -90,7 +90,7 @@ function buildBookmarks() {
     });
 }
 
-//fetch bookmarks
+//Fetch bookmarks
 function fetchBookmarks() {
     if(localStorage.getItem('bookmarks')) {
         bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
