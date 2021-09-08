@@ -6,6 +6,7 @@ const bookmarkForm = document.getElementById('bookmark-from');
 const websiteNameEl = document.getElementById('website-name');
 const websiteUrl = document.getElementById('website-url');
 
+let bookmarks = [];
 
 //Show modal
 function showModal() {
@@ -38,10 +39,33 @@ function storeBookmark(e) {
     if(!urlValue.includes('http://') && !urlValue.includes('https://')) {
         urlValue = `https://${urlValue}`;
     }
-    console.log(nameValue, urlValue);
+
     if(!validate(nameValue, urlValue)) {
         return false;
     }
+    const bookmark = {
+        name: nameValue,
+        url: urlValue,
+    };
+    bookmarks.push(bookmark);
+    localStorage.setItem('bookmarks',JSON.stringify(bookmarks));
+    fetchBookmarks();
+    bookmarkForm.reset();
+    websiteNameEl.focus();
+}
+//fetch bookmarks
+function fetchBookmarks() {
+    if(localStorage.getItem('bookmarks')) {
+        bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+    }else {
+        bookmarks = [{
+                name: 'google',
+                url: 'https://google.com',
+            },
+        ];
+        localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+    }
+    console.log(bookmarks)
 }
 
 //EVENT LISTENERS
@@ -50,3 +74,6 @@ modalClose.addEventListener('click',() => modal.classList.remove('show-modal'));
 window.addEventListener('click', (e) => (e.target === modal ? modal.classList.remove('show-modal') : false));
 
 bookmarkForm.addEventListener('submit', storeBookmark);
+
+//On load
+fetchBookmarks();
